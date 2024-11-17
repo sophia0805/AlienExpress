@@ -5,6 +5,10 @@
     width:125em;
 }
 
+*{
+font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
 .mapContainer {
     margin: 5em;
 }

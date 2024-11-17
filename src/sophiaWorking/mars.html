@@ -1,12 +1,10 @@
-<!--credits to https://github.com/Jolteous/3D-Jupiter-3JS-Model-->
 <!DOCTYPE html>
 <html lang="en">
-<!-- [Previous head section remains the same] -->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moon Viewer</title>
+    <title>Planet Viewer</title>
     <style>
         body { margin: 0; overflow: hidden; }
         canvas { display: block; }
@@ -23,9 +21,7 @@
         let renderer,
             camera,
             planet,
-            moon,
-            moonGroup,
-            sphereBg,
+            scene,
             container = document.getElementById("canvas_container"),
             timeout_Debounce,
             lastMouseX = 0,
@@ -35,15 +31,17 @@
             targetRotationY = 0,
             currentRotationX = 0,
             currentRotationY = 0,
-            cameraDistance = 15;
+            cameraDistance = 15,
+            dampingFactor = 0.05;
 
         init();
         animate();
-
+        
         function createLocationPin() {
             const pinGroup = new THREE.Group();
             
-            const coneGeometry = new THREE.ConeGeometry(0.3, 0.8, 16);
+            // Made the pin smaller to match Mars's scale
+            const coneGeometry = new THREE.ConeGeometry(0.15, 0.4, 16);
             const coneMaterial = new THREE.MeshPhongMaterial({ 
                 color: 0xff0000,
                 shininess: 100,
@@ -51,8 +49,8 @@
                 emissiveIntensity: 0.2
             });
             const cone = new THREE.Mesh(coneGeometry, coneMaterial);
-            cone.position.y = -0.4;
-            cone.rotation.x = 70;
+            cone.position.y = -0.2;  // Adjusted to be closer to surface
+            cone.rotation.x = 55;  // Rotated to point outward
             pinGroup.add(cone);
             
             return pinGroup;
@@ -82,55 +80,44 @@
             const loader = new THREE.TextureLoader();
 
             // Planet
-            const texturePlanet = loader.load('https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/saturn.jpg');
+            const texturePlanet = loader.load('https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/mars.jpg');
             texturePlanet.anisotropy = 16;
-            const planetGeometry = new THREE.SphereBufferGeometry(10, 50, 50);
+            const planetGeometry = new THREE.SphereBufferGeometry(5, 25, 25);
             const planetMaterial = new THREE.MeshLambertMaterial({
                 map: texturePlanet
             });
             planet = new THREE.Mesh(planetGeometry, planetMaterial);
-            planet.position.set(-50, 0, -30);
             scene.add(planet);
+            
+            // Location markers
+            // Moved out of requestAnimationFrame since we don't need to wait for anything
+            const locations = [
+                { lat: 15, lng: 0, name: "Location 1" },
+                { lat: -80, lng: 180, name: "Location 2" },
+                { lat: 100, lng: -60, name: "Location 3" }
+            ];
 
-            // Moon
-            const textureMoon = loader.load('https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/moon.jpg');
-            textureMoon.anisotropy = 16;
-            let moonGeometry = new THREE.SphereBufferGeometry(4, 32, 32);
-            let moonMaterial = new THREE.MeshPhongMaterial({
-                map: textureMoon
-            });
-            moon = new THREE.Mesh(moonGeometry, moonMaterial);
-            moon.position.set(0, 0, 0);
-            scene.add(moon);
-
-            // We need to wait a frame for the moon to be properly positioned
-            // before calculating its center for the pins
-            requestAnimationFrame(() => {
+            locations.forEach(location => {
+                const pin = createLocationPin();
                 
-                // Water location markers
-                const waterLocations = [
-                    { lat: 45, lng: 0 },
-                    { lat: -30, lng: 120 },
-                    { lat: 10, lng: -60 }
-                ];
-
-                waterLocations.forEach(location => {
-                    
-                    const pin = createLocationPin();
-                    
-                    const phi = (90 - location.lat) * (Math.PI / 180);
-                    const theta = (location.lng + 180) * (Math.PI / 180);
-                    const radius = 4.2;
-                    const x = -(radius) * Math.sin(phi) * Math.cos(theta);
-                    const y = (radius) * Math.cos(phi);
-                    const z = (radius) * Math.sin(phi) * Math.sin(theta);
-                    
-                    pin.position.set(x, y, z);
-                    
-                    // Make pin point toward moon's center
-                    pin.lookAt(0,0,0);
-                    scene.add(pin);
-                });
+                // Convert latitude and longitude to 3D coordinates
+                const phi = (90 - location.lat) * (Math.PI / 180);
+                const theta = (location.lng + 180) * (Math.PI / 180);
+                const radius = 5.1;  // Slightly larger than planet radius (5) to sit just above surface
+                
+                // Calculate position
+                const x = -(radius) * Math.sin(phi) * Math.cos(theta);
+                const y = (radius) * Math.cos(phi);
+                const z = (radius) * Math.sin(phi) * Math.sin(theta);
+                
+                pin.position.set(x, y, z);
+                
+                // Make pin point outward from planet's center
+                pin.lookAt(0, 0, 0);
+                // Rotate 180° so the point faces outward
+                pin.rotateX(Math.PI);
+                
+                scene.add(pin);
             });
 
             // Stars background
@@ -154,7 +141,6 @@
             container.addEventListener('wheel', onWheel);
         }
 
-        // [Previous event handlers and animation code remains the same]
         function onMouseDown(event) {
             isMouseDown = true;
             lastMouseX = event.clientX;
@@ -167,8 +153,8 @@
             const deltaX = event.clientX - lastMouseX;
             const deltaY = event.clientY - lastMouseY;
 
-            targetRotationY += deltaX * 0.01;
-            targetRotationX += deltaY * 0.01;
+            targetRotationY += deltaX * 0.005;
+            targetRotationX += deltaY * 0.005;
 
             targetRotationX = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, targetRotationX));
 
@@ -182,15 +168,15 @@
 
         function onWheel(event) {
             event.preventDefault();
-            cameraDistance += event.deltaY * 0.05;
+            cameraDistance += event.deltaY * 0.02;
             cameraDistance = Math.max(6, Math.min(30, cameraDistance));
         }
 
         function animate() {
             requestAnimationFrame(animate);
 
-            currentRotationX += (targetRotationX - currentRotationX) * 0.1;
-            currentRotationY += (targetRotationY - currentRotationY) * 0.1;
+            currentRotationX += (targetRotationX - currentRotationX) * dampingFactor;
+            currentRotationY += (targetRotationY - currentRotationY) * dampingFactor;
 
             const x = cameraDistance * Math.sin(currentRotationY) * Math.cos(currentRotationX);
             const y = cameraDistance * Math.sin(currentRotationX);
