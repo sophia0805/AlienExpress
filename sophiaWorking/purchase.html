@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - AlienExpress</title>
+    <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --space-blue: #0a0a2a;
+            --star-white: #b4f1f9;
+            --cosmic-glow: #5ff4ff;
+            --accent-yellow: #f0f757;
+            --border-color: #2a2a6a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Inter";
+        }
+
+        body {
+            background: #0a0a20;
+            color: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 32, 0.95);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .checkout-container {
+            max-width: 1200px;
+            margin: 7rem auto 2rem;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .checkout-form {
+            background: rgba(16, 16, 54, 0.5);
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--cosmic-glow);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--star-white);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            color: var(--star-white);
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--cosmic-glow);
+            box-shadow: 0 0 10px rgba(95, 244, 255, 0.2);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .order-summary {
+            background: rgba(16, 16, 54, 0.5);
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            height: fit-content;
+            position: sticky;
+            top: 7rem;
+        }
+
+        .product-card {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            border-color: var(--cosmic-glow);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .product-details-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .product-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-details h3 {
+            color: var(--star-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .quantity-btn {
+            background: rgba(95, 244, 255, 0.1);
+            border: 1px solid var(--cosmic-glow);
+            color: var(--cosmic-glow);
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .quantity-btn:hover {
+            background: rgba(95, 244, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .product-subtotal {
+            text-align: right;
+            color: var(--accent-yellow);
+            font-weight: bold;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .total-line {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border-color);
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-yellow);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--cosmic-glow), #57f7c3);
+            color: var(--space-blue);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(95, 244, 255, 0.3);
+        }
+
+        .security-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(87, 247, 195, 0.1);
+            border-radius: 0.5rem;
+            border: 1px solid var(--cosmic-glow);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo-container">
+            <img src="https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/R.png?v=1731781721491" alt="AlienExpress Logo" class="logo-img">
+            <span class="logo-text">AlienExpress - Galactic Hub</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Desktop App</a>
+            <a href="Map.js">Place Selection</a>
+            <a href="listing.html">Resource Shop</a>
+        </div>
+    </nav>
+
+    <div class="checkout-container">
+        <div class="checkout-form">
+            <h2 class="section-title">
+                <i class="fas fa-user-astronaut"></i>
+                Shipping Details
+            </h2>
+            
+            <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-input" placeholder="Enter your name">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Space Station / Colony</label>
+                <input type="text" class="form-input" placeholder="Enter your location">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Coordinates</label>
+                <input type="text" class="form-input" placeholder="Enter delivery coordinates">
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label class="form-label">Sector</label>
+                    <input type="text" class="form-input" placeholder="Sector number">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Quadrant</label>
+                    <input type="text" class="form-input" placeholder="Quadrant code">
+                </div>
+            </div>
+
+            <h2 class="section-title">
+                <i class="fas fa-credit-card"></i>
+                Payment Details
+            </h2>
+
+            <div class="form-group">
+                <label class="form-label">Cow Transfer Number</label>
+                <input type="text" class="form-input" placeholder="Enter your CTN">
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label class="form-label">Expiration Cycle</label>
+                    <input type="text" class="form-input" placeholder="MM/YY">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Security Code</label>
+                    <input type="text" class="form-input" placeholder="CVV">
+                </div>
+            </div>
+        </div>
+
+        <div class="order-summary">
+            <h2 class="section-title">
+                <i class="fas fa-shopping-cart"></i>
+                Order Summary
+            </h2>
+
+            <!-- Jupiter Water Product -->
+            <div class="product-card">
+                <div class="product-details-row">
+                    <div class="product-image">
+                        <img src="https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/can%20water.avif" alt="Jupiter Water" style="filter: hue-rotate(180deg) brightness(1.2);">
+                    </div>
+                    <div class="product-details">
+                        <h3>Jupiter Canned Water</h3>
+                        <p class="product-price" style="color: var(--accent-yellow);">50.00 cows 🐄</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="updateQuantity('jupiter', -1)">-</button>
+                            <span id="jupiter-quantity">1</span>
+                            <button class="quantity-btn" onclick="updateQuantity('jupiter', 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-subtotal" id="jupiter-subtotal">50.00 cows 🐄</div>
+            </div>
+
+            <!-- Mars Water Product -->
+            <div class="product-card">
+                <div class="product-details-row">
+                    <div class="product-image">
+                        <img src="https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/OIP.jpg" alt="Mars Water" style="filter: sepia(50%) hue-rotate(340deg) brightness(0.8);">
+                    </div>
+                    <div class="product-details">
+                        <h3>Mars Bucket Water</h3>
+                        <p class="product-price" style="color: var(--accent-yellow);">20.00 cows 🐄</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="updateQuantity('mars', -1)">-</button>
+                            <span id="mars-quantity">1</span>
+                            <button class="quantity-btn" onclick="updateQuantity('mars', 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-subtotal" id="mars-subtotal">20.00 cows 🐄</div>
+            </div>
+
+            <div class="summary-line">
+                <span>Subtotal</span>
+                <span id="cart-subtotal">70.00 cows 🐄</span>
+            </div>
+
+            <div class="summary-line">
+                <span>Quantum Shipping</span>
+                <span id="shipping">10.00 cows 🐄</span>
+            </div>
+
+            <div class="summary-line">
+                <span>Space Tax (5%)</span>
+                <span id="tax">4.00 cows 🐄</span>
+            </div>
+
+            <div class="total-line">
+                <span>Total</span>
+                <span id="total">84.00 cows 🐄</span>
+            </div>
+
+            <button class="btn btn-primary" id="purchaseBtn">Confirm Purchase</button>
+
+            <div class="security-info">
+                <i class="fas fa-shield-alt"></i>
+                <div>
+                    <div>Secured by Quantum Encryption</div>
+                    <small style="opacity: 0.7">Your transaction is protected</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const prices = {
+            jupiter: 50.00,
+            mars: 20.00
+        };
+
+        const quantities = {
+            jupiter: 1,
+            mars: 1
+        };
+
+        function updateQuantity(product, change) {
+            const newQuantity = quantities[product] + change;
+            if (newQuantity >= 0 && newQuantity <= 10) {  // Max 10 items per product
+                quantities[product] = newQuantity;
+                document.getElementById(`${product}-quantity`).textContent = newQuantity;
+                updateSubtotal(product);
+                update<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - AlienExpress</title>
+    <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --space-blue: #0a0a2a;
+            --star-white: #b4f1f9;
+            --cosmic-glow: #5ff4ff;
+            --accent-yellow: #f0f757;
+            --border-color: #2a2a6a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Inter";
+        }
+
+        body {
+            background: #0a0a20;
+            color: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 32, 0.95);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .checkout-container {
+            max-width: 1200px;
+            margin: 7rem auto 2rem;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .checkout-form {
+            background: rgba(16, 16, 54, 0.5);
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--cosmic-glow);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--star-white);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            color: var(--star-white);
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--cosmic-glow);
+            box-shadow: 0 0 10px rgba(95, 244, 255, 0.2);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .order-summary {
+            background: rgba(16, 16, 54, 0.5);
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            height: fit-content;
+            position: sticky;
+            top: 7rem;
+        }
+
+        .product-card {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            border-color: var(--cosmic-glow);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .product-details-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .product-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-details h3 {
+            color: var(--star-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .quantity-btn {
+            background: rgba(95, 244, 255, 0.1);
+            border: 1px solid var(--cosmic-glow);
+            color: var(--cosmic-glow);
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .quantity-btn:hover {
+            background: rgba(95, 244, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .product-subtotal {
+            text-align: right;
+            color: var(--accent-yellow);
+            font-weight: bold;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .total-line {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border-color);
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-yellow);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--cosmic-glow), #57f7c3);
+            color: var(--space-blue);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(95, 244, 255, 0.3);
+        }
+
+        .security-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(87, 247, 195, 0.1);
+            border-radius: 0.5rem;
+            border: 1px solid var(--cosmic-glow);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo-container">
+            <img src="https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/R.png?v=1731781721491" alt="AlienExpress Logo" class="logo-img">
+            <span class="logo-text">AlienExpress - Galactic Hub</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Desktop App</a>
+            <a href="Map.js">Place Selection</a>
+            <a href="listing.html">Resource Shop</a>
+        </div>
+    </nav>
+
+    <div class="checkout-container">
+        <div class="checkout-form">
+            <h2 class="section-title">
+                <i class="fas fa-user-astronaut"></i>
+                Shipping Details
+            </h2>
+            
+            <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-input" placeholder="Enter your name">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Space Station / Colony</label>
+                <input type="text" class="form-input" placeholder="Enter your location">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Coordinates</label>
+                <input type="text" class="form-input" placeholder="Enter delivery coordinates">
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label class="form-label">Sector</label>
+                    <input type="text" class="form-input" placeholder="Sector number">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Quadrant</label>
+                    <input type="text" class="form-input" placeholder="Quadrant code">
+                </div>
+            </div>
+
+            <h2 class="section-title">
+                <i class="fas fa-credit-card"></i>
+                Payment Details
+            </h2>
+
+            <div class="form-group">
+                <label class="form-label">Cow Transfer Number</label>
+                <input type="text" class="form-input" placeholder="Enter your CTN">
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label class="form-label">Expiration Cycle</label>
+                    <input type="text" class="form-input" placeholder="MM/YY">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Security Code</label>
+                    <input type="text" class="form-input" placeholder="CVV">
+                </div>
+            </div>
+        </div>
+
+        <div class="order-summary">
+            <h2 class="section-title">
+                <i class="fas fa-shopping-cart"></i>
+                Order Summary
+            </h2>
+
+            <!-- Jupiter Water Product -->
+            <div class="product-card">
+                <div class="product-details-row">
+                    <div class="product-image">
+                        <img src="https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/can%20water.avif" alt="Jupiter Water" style="filter: hue-rotate(180deg) brightness(1.2);">
+                    </div>
+                    <div class="product-details">
+                        <h3>Jupiter Canned Water</h3>
+                        <p class="product-price" style="color: var(--accent-yellow);">50.00 cows 🐄</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="updateQuantity('jupiter', -1)">-</button>
+                            <span id="jupiter-quantity">1</span>
+                            <button class="quantity-btn" onclick="updateQuantity('jupiter', 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-subtotal" id="jupiter-subtotal">50.00 cows 🐄</div>
+            </div>
+
+            <!-- Mars Water Product -->
+            <div class="product-card">
+                <div class="product-details-row">
+                    <div class="product-image">
+                        <img src="https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/OIP.jpg" alt="Mars Water" style="filter: sepia(50%) hue-rotate(340deg) brightness(0.8);">
+                    </div>
+                    <div class="product-details">
+                        <h3>Mars Bucket Water</h3>
+                        <p class="product-price" style="color: var(--accent-yellow);">20.00 cows 🐄</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="updateQuantity('mars', -1)">-</button>
+                            <span id="mars-quantity">1</span>
+                            <button class="quantity-btn" onclick="updateQuantity('mars', 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-subtotal" id="mars-subtotal">20.00 cows 🐄</div>
+            </div>
+
+            <div class="summary-line">
+                <span>Subtotal</span>
+                <span id="cart-subtotal">70.00 cows 🐄</span>
+            </div>
+
+            <div class="summary-line">
+                <span>Quantum Shipping</span>
+                <span id="shipping">10.00 cows 🐄</span>
+            </div>
+
+            <div class="summary-line">
+                <span>Space Tax (5%)</span>
+                <span id="tax">4.00 cows 🐄</span>
+            </div>
+
+            <div class="total-line">
+                <span>Total</span>
+                <span id="total">84.00 cows 🐄</span>
+            </div>
+
+            <button class="btn btn-primary" id="purchaseBtn">Confirm Purchase</button>
+
+            <div class="security-info">
+                <i class="fas fa-shield-alt"></i>
+                <div>
+                    <div>Secured by Quantum Encryption</div>
+                    <small style="opacity: 0.7">Your transaction is protected</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const prices = {
+            jupiter: 50.00,
+            mars: 20.00
+        };
+
+        const quantities = {
+            jupiter: 1,
+            mars: 1
+        };
+
+        function updateQuantity(product, change) {
+            const newQuantity = quantities[product] + change;
+            if (newQuantity >= 0 && newQuantity <= 10) {  // Max 10 items per product
+                quantities[product] = newQuantity;
+                document.getElementById(`${product}-quantity`).textContent = newQuantity;
+                updateSubtotal(product);
+                updateTotals();
+            }
+        }
+
+        function updateSubtotal(product) {
+            const subtotal = quantities[product] * prices[product];
+            document.getElementById(`${product}-subtotal`).textContent = `${subtotal.toFixed(2)} cows 🐄`;
+        }
+
+        function updateTotals() {
+            const subtotal = Object.keys(quantities).reduce((total, product) => {
+                return total + (quantities[product] * prices[product]);
+            }, 0);
+            
+            const shipping = 10.00; // Fixed shipping cost
+            const tax = subtotal * 0.05; // 5% tax
+            const total = subtotal + shipping + tax;
+
+            document.getElementById('cart-subtotal').textContent = `${subtotal.toFixed(2)} cows 🐄`;
+            document.getElementById('shipping').textContent = `${shipping.toFixed(2)} cows 🐄`;
+            document.getElementById('tax').textContent = `${tax.toFixed(2)} cows 🐄`;
+            document.getElementById('total').textContent = `${total.toFixed(2)} cows 🐄`;
+        }
+
+        // Purchase button handler
+        document.getElementById('purchaseBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const inputs = document.querySelectorAll('.form-input');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.style.borderColor = '#ff4444';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = 'var(--border-color)';
+                }
+            });
+            
+            if (isValid) {
+                const totalQuantity = Object.values(quantities).reduce((a, b) => a + b, 0);
+                if (totalQuantity === 0) {
+                    alert('Please add at least one item to your cart.');
+                    return;
+                }
+
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                this.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Order placed successfully! Your water will be quantum-shipped shortly.');
+                    window.location.href = 'index.html';
+                }, 2000);
+            } else {
+                alert('Please fill in all required fields.');
+            }
+        });
+
+        // Initialize the totals
+        updateTotals();
+    </script>
+</body>
+</html>
