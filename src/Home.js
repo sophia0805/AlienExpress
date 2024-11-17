@@ -26,7 +26,7 @@ function Home() {
                 </a>
                 <div className="nav-links">
                     <a href="index.html" className="text cursor">Desktop App</a> 
-                    <a className="text cursor">Location Selection</a>
+                    <a className="text cursor" onClick={goToMap}>Location Selection</a>
                     <a onClick={goToListing}className="text cursor">Resource Shop</a>
                 </div>
             </nav>
