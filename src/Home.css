@@ -47,8 +47,8 @@ object-fit: contain;
 color: #ffffff;
 font-size: 1.5rem;
 font-weight: bold;
+font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
-
 
 .nav-links {
 display: flex;
@@ -59,6 +59,7 @@ gap: 2rem;
 color: #ffffff;
 text-decoration: none;
 font-weight: 500;
+font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 .titleing {
@@ -74,6 +75,7 @@ justify-content: center;
 text-align: center;
 position: relative;
 flex-direction: column;
+font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 .titleing::before {
@@ -84,6 +86,7 @@ left: 0;
 right: 0;
 bottom: 0;
 background: radial-gradient(circle at center, transparent 0%, rgba(10, 10, 32, 0.8) 100%);
+font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 .titleing h1 {
@@ -92,6 +95,7 @@ margin-bottom: 1rem;
 position: relative;
 z-index: 1;
 text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 .titleing h2 {
@@ -99,6 +103,7 @@ font-size: 1.5rem;
 position: relative;
 z-index: 1;
 text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 .features {
@@ -138,11 +143,13 @@ margin-bottom: 1rem;
 font-size: 1.25rem;
 margin-bottom: 1rem;
 color: #ffffff;
+font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 .feature-card p {
 color: rgba(255, 255, 255, 0.8);
 line-height: 1.5;
+font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 .glow {
@@ -180,6 +187,7 @@ transition: all 0.3s ease;
 text-decoration: none;
 margin-top: 2rem;
 display: inline-block;
+font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 .startbutton::before {
@@ -227,6 +235,7 @@ z-index: 1;
 
 .titleing h1 {
 margin-bottom: 1rem;
+font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 @keyframes pulse {

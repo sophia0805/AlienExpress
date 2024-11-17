@@ -21,6 +21,7 @@ width: 100%;
 top: 0;
 z-index: 10;
 backdrop-filter: blur(10px);
+font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 .logo-container {
@@ -42,10 +43,10 @@ font-size: 1.5rem;
 font-weight: bold;
 }
 
-
 .nav-links {
 display: flex;
 gap: 2rem;
+font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 .nav-links a {
@@ -66,7 +67,7 @@ font-weight: 500;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Inter";
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 body {

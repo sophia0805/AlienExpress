@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mars Water - Product Details</title>
+    <title>AlienExpress - Product Details</title>
     <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet">
     <style>
         :root {
@@ -19,6 +19,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "Inter";
+            overflow: hidden;
         }
         
         
@@ -72,7 +73,6 @@
             min-height: 100vh;
         }
 
-        /* Space background styles from previous example */
         .stars {
             position: fixed;
             top: 0;
@@ -235,7 +235,6 @@
         }
 
         .source-info {
-            /* Remove margin-top since it's now in a flex container */
             margin-top: 0;
             padding: 1rem;
             background: rgba(16, 16, 54, 0.5);
@@ -246,7 +245,6 @@
             gap: 0.5rem;
         }
 
-        /* If you want to style the iframe */
         .source-info iframe {
             width: 100%;
             height: 300px;
@@ -299,13 +297,12 @@
     <div class="stars"></div>
     <div class="stars"></div>
     <nav class="navbar">
-        <a href="index.html" class="logo-container">
+        <a href="http://localhost:3000/" class="logo-container">
             <img src="https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/R.png?v=1731781721491" alt="AlienExpress Logo" class="logo-img">
             <span class="logo-text">AlienExpress - Galactic Hub</span>
         </a>
         <div class="nav-links">
-            <!--directory-->
-            <a href="index.html">Desktop App</a>
+            <a href="http://localhost:3000/">Desktop App</a>
             <a href="Map.js">Place Selection</a>
             <a href="listing.html">Resource Shop</a>
         </div>
@@ -320,7 +317,6 @@
     </div>
 
     <div class="product-container">
-        <!-- Create a left column div to group image and source info -->
         <div class="left-column">
             <div class="product-image">
                 <img src="https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/OIP%20(1).jpg" alt="Jupiter Canned Water" style="filter: hue-rotate(180deg) brightness(1.2);" />
@@ -383,7 +379,6 @@
     </div>
 
     <script>
-        // Add 3D hover effect to product image
         const productImage = document.querySelector('.product-image');
         
         productImage.addEventListener('mousemove', (e) => {
