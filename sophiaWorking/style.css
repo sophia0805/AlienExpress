@@ -1,0 +1,87 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #14152A;
+}
+  
+li {
+  float: left;
+}
+.page1 {
+  min-height: 100%;
+  margin: 0px;
+  /* margin: 0px; centers the nav bar */
+  background: url("https://cdn.glitch.global/2cc97dfb-e0e2-411d-bca2-fc582838a41b/Screenshot%202024-11-16%20130339.png");
+  background-color: #14152A;
+  background-size: cover;
+  background-repeat: no-repeat; /* prevents tiling of the image */
+  background-position: center 30px; /* ensures image starts at the top */
+    
+}
+  
+.page2 {
+  min-height: 100%;
+  margin: 0px;
+  /* margin: 0px; centers the nav bar */
+  background: url("https://cdn.glitch.global/2cc97dfb-e0e2-411d-bca2-fc582838a41b/Screenshot%202024-11-16%20105039.png");
+}
+  
+.page3 {
+  min-height: 100%;;
+  /* margin: 0px; centers the nav bar */
+  background: url("https://cdn.glitch.com/2cc97dfb-e0e2-411d-bca2-fc582838a41b%2Fmichsupremacyuuwu.jpg?v=1627046686094");
+}
+  
+li a {
+  display: block;
+  padding: 15px 35px;
+  text-decoration: none;
+  color: white;
+  justify-content: flex-end; /* Move items to the right */
+}
+  
+  /* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+  
+ul {
+  font-family: "Inter";
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  display: flex; /* Use Flexbox for better alignment */
+  justify-content: flex-end; /* Move items to the right */
+  color: white;
+  text-align: center;
+  font-size: 12px;
+}
+
+.site-name {
+  transform: translate(-1100%, 30%);
+}
+/*title*/
+h1 {
+  text-align: center;
+  color: white;
+  font-family: "Inter";
+  font-size: 25px;
+  transform: translateY(365px);
+}
+  
+p {
+  color: black;
+  font-family: "Inter";
+  font-size: 25px;
+}
+p span {
+  background-color: white;
+  padding: 10px;
+} 
+  /* image */
+img{
+  transform: translateY(365px);
+}
+  
