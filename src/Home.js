@@ -54,7 +54,7 @@ function Home() {
         </div>
         <div className="feature-card">
             <img src="https://cdn.mos.cms.futurecdn.net/idzyPDTtTT7KgXJoTpmuoG.jpg" alt="Resources" className='resources' />
-            <h3 className="text">Alien Trading</h3>
+            <h3 className="text">Alien Communications</h3>
             <p className="text">Building relations with our alien overlords through trade</p>
         </div>
     </div>

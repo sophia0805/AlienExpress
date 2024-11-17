@@ -123,7 +123,7 @@ function Map() {
         </div>
       </nav>
       <div className="top elementContainer">
-        <p className="instruction h1">Step 2: Set your preferences</p>
+        <p className="instruction h1 floating">Step 2: Set your preferences</p>
       </div>
       <div className="columnContainer">
         <div className="leftColumn">

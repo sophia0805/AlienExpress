@@ -128,10 +128,15 @@ textarea {
 }
 
 .instruction {
-    margin-top: 1em;
-    padding: .5em 2em .5em 2em;
+    margin-top: 2em;
+    padding: .5em 3em .5em 3em;
     border-radius: 1rem;
+    
 }
+
+.floating {
+    animation: float 6s ease-in-out infinite;
+    }
 
 .table {
     border: 1px solid white;
