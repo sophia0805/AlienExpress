@@ -20,12 +20,6 @@ function Listing () {
     return(
         <>
         <div className="stars"></div>
-    <div className="stars"></div>
-    <div className="stars"></div>
-    <div className="nebula"></div>
-    <div className="shooting-star"></div>
-    <div className="shooting-star"></div>
-    <div className="shooting-star"></div>
     <nav className="navbar">
     <a className="logo-container" onClick={goHome}>  
                     <img className="cow" src={logo} alt="logo"/>
@@ -50,7 +44,6 @@ function Listing () {
                 <p className="product-price">5 cows 🐄</p>
             </div>
         </a>
-        
         <a href="jupiterinfo.html" className="product-card-link">
             <div className="product-card floating">
                 <div className="product-image">
@@ -58,6 +51,15 @@ function Listing () {
                 </div>
                 <h2 className="product-title">Canned Jupiter Water</h2>
                 <p className="product-price">1 cow 🐄</p>
+            </div>
+        </a>
+        <a href="jupiterinfo.html" className="product-card-link">
+            <div className="product-card floating">
+                <div className="product-image">
+                    <img src="https://www.thoughtco.com/thmb/g8h6NnWWWVkm-KXNBgMx-0Edd2U=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages_482194715-56a1329e5f9b58b7d0bcf666.jpg" alt="cannedJupiter" className="productImage" />
+                </div>
+                <h2 className="product-title">The Entire Europa Ocean</h2>
+                <p className="product-price">10 cows🐄</p>
             </div>
         </a>
     </div>
