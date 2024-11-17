@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jupiter Water - Product Details</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet">
+    <style>
+        :root {
+            --space-blue: #0a0a2a;
+            --star-white: #b4f1f9;
+            --cosmic-glow: #5ff4ff;
+            --accent-yellow: #f0f757;
+            --border-color: #2a2a6a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Inter";
+        }
+        
+        
+        .navbar {
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 32, 0.95);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+    
+        body {
+            background: var(--space-blue);
+            color: var(--star-white);
+            min-height: 100vh;
+        }
+
+        /* Space background styles from previous example */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200%;
+            transform: translateY(0);
+            animation: stars-move 50s linear infinite;
+            background-image: 
+                radial-gradient(1px 1px at 25px 5px, white, rgba(255, 255, 255, 0)),
+                radial-gradient(1px 1px at 50px 25px, white, rgba(255, 255, 255, 0)),
+                /* ... other gradients ... */;
+            background-size: 200px 200px;
+            background-repeat: repeat;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .breadcrumb {
+            padding: 1rem 2rem;
+            background: rgba(16, 16, 54, 0.5);
+            margin-top: 5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breadcrumb a {
+            color: var(--star-white);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 1;
+            color: var(--cosmic-glow);
+        }
+
+        .breadcrumb span {
+            color: var(--cosmic-glow);
+            margin: 0 0.5rem;
+        }
+
+        .product-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .product-image {
+            border-radius: 1rem;
+            overflow: hidden;
+            position: relative;
+            background: rgba(16, 16, 54, 0.5);
+            border: 1px solid var(--border-color);
+            aspect-ratio: 1;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(95, 244, 255, 0.1), transparent);
+            pointer-events: none;
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 2.5rem;
+            color: var(--cosmic-glow);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            color: var(--accent-yellow);
+            font-weight: bold;
+        }
+
+        .product-status {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(16, 16, 54, 0.5);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .status-icon {
+            color: var(--cosmic-glow);
+            font-size: 1.5rem;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--cosmic-glow), #57f7c3);
+            color: var(--space-blue);
+            margin-bottom: 1rem;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--cosmic-glow);
+            color: var(--cosmic-glow);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(95, 244, 255, 0.3);
+        }
+
+        .product-details {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .product-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .source-info {
+            /* Remove margin-top since it's now in a flex container */
+            margin-top: 0;
+            padding: 1rem;
+            background: rgba(16, 16, 54, 0.5);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* If you want to style the iframe */
+        .source-info iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+            border-radius: 0.5rem;
+        }
+
+        .merchant-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(16, 16, 54, 0.5);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .merchant-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(95, 244, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cosmic-glow);
+        }
+
+        .tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            padding: 0.5rem 1rem;
+            background: rgba(95, 244, 255, 0.1);
+            border: 1px solid var(--cosmic-glow);
+            border-radius: 2rem;
+            color: var(--cosmic-glow);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="stars"></div>
+    <div class="stars"></div>
+    <nav class="navbar">
+        <a href="#" class="logo-container">
+            <img src="https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/R.png?v=1731781721491" alt="AlienExpress Logo" class="logo-img">
+            <span class="logo-text">AlienExpress - Galactic Hub</span>
+        </a>
+        <div class="nav-links">
+            <!--directory-->
+            <a href="index.html">Desktop App</a>
+            <a href="Map.js">Place Selection</a>
+            <a href="listing.html">Resource Shop</a>
+        </div>
+    </nav>
+
+    <div class="breadcrumb">
+        <a href="listing.html">Galactic Hub</a>
+        <span>></span>
+        <a href="jupiterinfo.html">Jupiter Resources</a>
+        <span>></span>
+        Jupiter Canned Water 
+    </div>
+
+    <div class="product-container">
+        <!-- Create a left column div to group image and source info -->
+        <div class="left-column">
+            <div class="product-image">
+                <img src="https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/can%20water.avif" alt="Jupiter Canned Water" style="filter: hue-rotate(180deg) brightness(1.2);" />
+            </div>
+            <div class="source-info">
+                <div class="source-indicator"></div>
+                <div>Source (red indicators): <br>Drag the model around! </div>
+                <iframe src="jupiter.html"></iframe>
+            </div>
+        </div>
+
+        <div class="product-info">
+            <div>
+                <h1 class="product-title">Jupiter Canned Water</h1>
+                <p class="product-price">50.00 cows 🐄</p>
+            </div>
+
+            <div class="product-status">
+                <i class="fas fa-shield-alt status-icon"></i>
+                <div>
+                    <div>Protected by Intergalactic Trade Federation</div>
+                    <small style="opacity: 0.7">All transactions secured by quantum encryption</small>
+                </div>
+            </div>
+
+            <button class="btn btn-primary">Purchase Now</button>
+
+            <div class="product-details">
+                <p>• Harvested from Jupiter's upper atmosphere</p>
+                <p>• Zero contamination rating</p>
+                <p>• Quantum-sealed container</p>
+                <p>• Anti-gravity preservation system</p>
+            </div>
+
+            <div class="tags">
+                <span class="tag">#JupiterWater</span>
+                <span class="tag">#PremiumResource</span>
+                <span class="tag">#SpaceGrade</span>
+            </div>
+
+            <div class="merchant-info">
+                <div class="merchant-avatar">
+                    <i class="fas fa-user-astronaut"></i>
+                </div>
+                <div>
+                    <div>Jovian H2O Corp</div>
+                    <small style="opacity: 0.7">Premier Jupiter Resource Collector</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add 3D hover effect to product image
+        const productImage = document.querySelector('.product-image');
+        
+        productImage.addEventListener('mousemove', (e) => {
+            const { left, top, width, height } = productImage.getBoundingClientRect();
+            const x = (e.clientX - left) / width;
+            const y = (e.clientY - top) / height;
+            
+            productImage.style.transform = `
+                perspective(1000px)
+                rotateY(${(x - 0.5) * 20}deg)
+                rotateX(${(y - 0.5) * -20}deg)
+            `;
+        });
+
+        productImage.addEventListener('mouseleave', () => {
+            productImage.style.transform = 'none';
+        });
+    </script>
+</body>
+</html>
+<div class="rarity">
+    <i class="fas fa-gem"></i>
+    Recommended Amount: 
+</div>
