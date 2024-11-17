@@ -1,5 +1,6 @@
 import './MarsInfo.css';
 import logo from './img/cow.png';
+import waterBucket from './img/waterBucket.jpg';
 import avatar from './img/merchantAvatar.jpg';
 import { useNavigate } from 'react-router-dom';
 
@@ -38,7 +39,7 @@ function MarsInfo () {
             <a onClick={goToListing} className="text cursor">Resource Shop</a>
             </div>
         </nav>
-
+        waterBucket
         
     <div className="breadcrumb">
         <a href="listing.html">Galactic Hub</a>
@@ -47,6 +48,17 @@ function MarsInfo () {
         <span></span>
         Mars Bucketed Water 
     </div>
+    <div class="product-container">
+    <div class="left-column">
+            <div class="product-image">
+                <img src="https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/OIP%20(1).jpg" alt="Jupiter Canned Water" className="productPhoto" />
+            </div>
+            <div class="source-info">
+                <div class="source-indicator"></div>
+                <div>Sourced from (red indicators): <br/>Drag the model around!</div>
+                <iframe src="mars.html"></iframe>
+            </div>
+        </div>
     <div className="product-info">
         <div>
                 <h1 className="product-title">Mars Bucket o' Water</h1>
@@ -93,6 +105,8 @@ function MarsInfo () {
                     <small className="pointSeven">Basic Resource Extractor - Class C License</small>
                 </div>
             </div>
+    </div>
+    
         </>
     );
 }
