@@ -52,6 +52,11 @@ function Home() {
             <h3 className="text">Resource Trade</h3>
             <p className="text">Trading natural resources from other planets for cows on earth</p>
         </div>
+        <div className="feature-card">
+            <img src="https://cdn.mos.cms.futurecdn.net/idzyPDTtTT7KgXJoTpmuoG.jpg" alt="Resources" className='resources' />
+            <h3 className="text">Alien Trading</h3>
+            <p className="text">Building relations with our alien overlords through trade</p>
+        </div>
     </div>
         </>
     );
