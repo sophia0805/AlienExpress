@@ -232,7 +232,7 @@
             padding: 2rem;
             max-width: 1200px;
             margin: 0 auto;
-            transform: translateY(5rem);
+            transform: translate(-3rem, 5rem);
         }
 
         .product-card {
@@ -296,7 +296,7 @@
     <div class="shooting-star"></div>
     <!--navigation bar (title, resource shop, map)-->
     <nav class="navbar">
-        <a href="#" class="logo-container">
+        <a href="index.html" class="logo-container">
             <img src="https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/R.png?v=1731781721491" alt="AlienExpress Logo" class="logo-img">
             <span class="logo-text">AlienExpress - Galactic Hub</span>
         </a>
@@ -311,15 +311,18 @@
         </div>
     </nav>
     <div class="product-grid">
-        <div class="product-card floating">
-            <div class="product-image">
-                <img src="https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/OIP.jpg" alt="bucketsMars" style="width: 100%; height: 100%; object-fit: cover; filter: hue-rotate(180deg) brightness(1.2);" />
+        <a href="marsinfo.html" class="product-card-link">
+            <div class="product-card floating">
+                <div class="product-image">
+                    <img src="https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/OIP.jpg" alt="bucketsMars" style="width: 100%; height: 100%; object-fit: cover; filter: hue-rotate(180deg) brightness(1.2);" />
+                </div>
+                <h2 class="product-title">Buckets of Mars Water</h2>
+                <p class="product-price">50.00 cows 🐄</p>
             </div>
-            <h2 class="product-title">Buckets of Mars Water</h2>
-            <p class="product-price">50.00 cows 🐄</p>
-        </div>
+        </a>
+        
         <a href="jupiterinfo.html" class="product-card-link">
-            <div class="product-card floating" style="animation-delay: 0.2s">
+            <div class="product-card floating">
                 <div class="product-image">
                     <img src="https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/can%20water.avif" alt="cannedJupiter" style="width: 100%; height: 100%; object-fit: cover; filter: hue-rotate(90deg) brightness(1.2);" />
                 </div>
@@ -327,8 +330,8 @@
                 <p class="product-price">8,500.00 cows 🐄</p>
             </div>
         </a>
-
     </div>
+    
     <script>
         // Add hover effects to product images
         document.querySelectorAll('.product-image').forEach(image => {
