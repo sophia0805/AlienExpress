@@ -13,16 +13,20 @@ function Home() {
     const goToListing=()=>{
         navigate('/listing');
     }
+
+    const goHome=()=>{
+        navigate('/home');
+    }
     return(
         <>
             <nav className="navbar">
-                <a href="#" className="logo-container">       
-                <img className="cow" src={logo} alt="logo"/>
-                    <span className="logo-text text">AlienExpress</span>
+                <a href="#" className="logo-container" onClick={goHome}>  
+                    <img className="cow" src={logo} alt="logo"/>
+                        <span className="logo-text text">AlienExpress</span>
                 </a>
                 <div className="nav-links">
                     <a href="index.html" className="text cursor">Desktop App</a> 
-                    <a onClick={goToMap} className="text cursor">Location Selection</a>
+                    <a className="text cursor">Location Selection</a>
                     <a onClick={goToListing}className="text cursor">Resource Shop</a>
                 </div>
             </nav>
@@ -30,7 +34,7 @@ function Home() {
         <div className="titleing">
             <div className="glow"></div>
             <h1 className="floating text">Intergalactic Resource Marketplace</h1>
-            <h2 className="floating text">for underpriviledged communities in need</h2>
+            <h2 className="floating text">For underpriviledged and water-scarce communities </h2>
             <a className="startbutton pulse text" onClick={goToMap}>
                 Get Started
             </a>

@@ -2,7 +2,7 @@
 margin: 0;
 padding: 0;
 box-sizing: border-box;
-font-family: -apple-system, BlinkMacSystemFont, "Inter";
+font-family: 'Roboto', sans-serif;
 }
 
 html, body {
@@ -255,8 +255,4 @@ background-color: #4a90e2;
 
 .cursor {
 cursor:pointer;
-}
-
-.text {
-    font-family: 'Roboto', sans-serif;
 }
