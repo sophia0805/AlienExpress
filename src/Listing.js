@@ -44,7 +44,7 @@ function Listing () {
                 <p className="product-price">5 cows 🐄</p>
             </div>
         </a>
-        <a href="jupiterinfo.html" className="product-card-link">
+        <a href="http://localhost:5500/src/jupiter/" className="product-card-link">
             <div className="product-card floating">
                 <div className="product-image">
                     <img src="https://cdn.glitch.global/6cecf6a3-d527-4bf1-b4c3-e4900e777fdb/can%20water.avif" alt="cannedJupiter" className="productImage" />
@@ -58,7 +58,7 @@ function Listing () {
                 <div className="product-image">
                     <img src="https://www.thoughtco.com/thmb/g8h6NnWWWVkm-KXNBgMx-0Edd2U=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages_482194715-56a1329e5f9b58b7d0bcf666.jpg" alt="cannedJupiter" className="productImage" />
                 </div>
-                <h2 className="product-title">The Entire Europa Ocean</h2>
+                <h2 className="product-title">The Entire Enceladus Ocean</h2>
                 <p className="product-price">10 cows🐄</p>
             </div>
         </a>
