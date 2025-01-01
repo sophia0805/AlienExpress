@@ -1,4 +1,3 @@
-import { Navigate } from 'react-router';
 import './Home.css';
 import logo from './img/cow.png';
 import { useNavigate } from 'react-router-dom';

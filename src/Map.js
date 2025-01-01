@@ -1,6 +1,6 @@
 import './Map.css';
 import React, { useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import logo from './img/cow.png';
