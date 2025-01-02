@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/alienexpress/static/css/main.596a79e2.css",
+    "main.js": "/alienexpress/static/js/main.2026ebed.js",
+    "static/js/488.84b5d244.chunk.js": "/alienexpress/static/js/488.84b5d244.chunk.js",
+    "static/media/cow.png": "/alienexpress/static/media/cow.0e714735ecb0dc1b419f.png",
+    "index.html": "/alienexpress/index.html",
+    "main.596a79e2.css.map": "/alienexpress/static/css/main.596a79e2.css.map",
+    "main.2026ebed.js.map": "/alienexpress/static/js/main.2026ebed.js.map",
+    "488.84b5d244.chunk.js.map": "/alienexpress/static/js/488.84b5d244.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.596a79e2.css",
+    "static/js/main.2026ebed.js"
+  ]
+}
