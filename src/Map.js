@@ -90,7 +90,7 @@ function CropPreference() {
         method: 'POST', //GET, POST, PUT, DELETE
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer WI9PRPUZJU3CULMLT5RIW0AA0KXZ39K06NLHCYSX5KRQJSOHYKAWPV7MORX6BP2Z`
+          'Authorization': `Bearer ${OPENAI_API_KEY}`
         },
         //NOT needed with GET request
         body: JSON.stringify(
